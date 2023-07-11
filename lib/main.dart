@@ -1,4 +1,5 @@
 
+import 'package:bookappclean/Core/NewModel/book2_model/book2_model.dart';
 import 'package:bookappclean/Core/const.dart';
 import 'package:bookappclean/Core/utils/network/local/blo_cobser.dart';
 import 'package:bookappclean/Core/utils/network/local/cache_Helper.dart';
@@ -19,6 +20,7 @@ void main() async {
   Bloc.observer = MyBlocObserver();
 await Hive.initFlutter();
 await Hive.openBox(kNotebook);
+Hive.registerAdapter(Book2ModelAdapter());
   await CacheHelper.init();
   await DioHelper.init();
   runApp(const MyApp());

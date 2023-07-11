@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
               state is GetBbestSallerBookError || state is GetBSearchListBooksError ?
               
                // ignore: prefer_const_constructors
-               Center(child: Text("data"),) 
+               Center(child: Text("Network Error "),) 
               :  Center(child: CircularProgressIndicator()) ;
             },
           ),

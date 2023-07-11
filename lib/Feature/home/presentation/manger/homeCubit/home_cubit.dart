@@ -1,9 +1,11 @@
 import 'package:bookappclean/Core/NewModel/book2_model/book2_model.dart';
+import 'package:bookappclean/Core/const.dart';
 // import 'package:bookappclean/Core/NewModel/book2_model/item.dart';
 import 'package:bookappclean/Core/utils/network/remote/dio_helper.dart';
 // import 'package:bookappclean/Feature/home/data/Model/book_model.dart';
 import 'package:bookappclean/Feature/home/presentation/manger/homeCubit/home_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/adapters.dart';
 
 class HomeCubit extends Cubit<HomeStates> {
   HomeCubit() : super(InitHomeState());
@@ -12,6 +14,8 @@ class HomeCubit extends Cubit<HomeStates> {
 
   Future<void> featherBookList() async {
     print("object ya man");
+    // ignore: unused_local_variable
+    var hivbox=Hive.box(kNotebook);
     emit(GetBookListLoading());
     DioHelper.getData(
             url: 'volumes',
@@ -19,6 +23,8 @@ class HomeCubit extends Cubit<HomeStates> {
         .then((value) {
       print("object ya man");
       print(value.data);
+    hivbox.add(value);
+
 
       booklist = Book2Model.fromJson(value.data);
       // print("Aha AAAAAAAAAAAAAAA");
@@ -29,6 +35,7 @@ class HomeCubit extends Cubit<HomeStates> {
     }).catchError((e) {
       // print(e);
       // print("object ya man ya fager ");
+
 
       emit(GetBookListError());
     });
