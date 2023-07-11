@@ -1,10 +1,17 @@
 // import 'package:bookappclean/Feature/home/domain/entity/bookentity.dart';
 
-import 'item.dart';
+import 'package:hive/hive.dart';
 
-class Book2Model  {
+import 'item.dart';
+// import 'package:flutter/material.dart';
+part 'book2_model.g.dart';
+@HiveType(typeId: 0)
+class Book2Model extends HiveObject {
+  @HiveField(0)
   String? kind;
+  @HiveField(1)
   num? totalItems;
+  @HiveField(2)
   List<Item>? items;
 
   Book2Model({this.kind, this.totalItems, this.items});
